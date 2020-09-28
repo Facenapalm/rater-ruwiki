@@ -25,7 +25,10 @@ $.when(
 ).then(function() {
 	var conf = mw.config.get(["wgNamespaceNumber", "wgPageName"]);
 	if ( conf.wgPageName != "Песочница" ) {
-		if ( conf.wgNamespaceNumber != 0 || conf.wgNamespaceNumber != 1 || $("li.new[id|=ca-nstab]").length ) {
+		if ( conf.wgNamespaceNumber != 0 && conf.wgNamespaceNumber != 1 ) {
+			return;
+		}
+		if ( $("li.new[id|=ca-nstab]").length ) {
 			return;
 		}
 	}
