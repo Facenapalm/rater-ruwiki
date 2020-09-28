@@ -24,7 +24,7 @@ $.when(
 	$.ready
 ).then(function() {
 	var conf = mw.config.get(["wgNamespaceNumber", "wgPageName"]);
-	if ( conf.wgPageName != "Песочница" ) {
+	if ( conf.wgPageName.indexOf("Песочница") !== 1 ) {
 		if ( conf.wgNamespaceNumber != 0 && conf.wgNamespaceNumber != 1 ) {
 			return;
 		}

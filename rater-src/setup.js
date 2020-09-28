@@ -55,26 +55,26 @@ var setupRater = function(clickEvent) {
 							? template.redirectTarget.getMainText()
 							: template.getTitle().getMainText();
 						return allBanners.withRatings.includes(mainText) || 
-						allBanners.withoutRatings.includes(mainText) ||
-						allBanners.wrappers.includes(mainText) ||
-						allBanners.notWPBM.includes(mainText) ||
-						allBanners.inactive.includes(mainText);
+						(allBanners.withoutRatings && allBanners.withoutRatings.includes(mainText)) ||
+						(allBanners.wrappers && allBanners.wrappers.includes(mainText)) ||
+						(allBanners.notWPBM && allBanners.notWPBM.includes(mainText)) ||
+						(allBanners.inactive && allBanners.inactive.includes(mainText));
 					},
 					// Set additional properties if needed
 					template => {
 						var mainText = template.redirectTarget
 							? template.redirectTarget.getMainText()
 							: template.getTitle().getMainText();
-						if (allBanners.wrappers.includes(mainText)) {
+						if (allBanners.wrappers && allBanners.wrappers.includes(mainText)) {
 							template.redirectTarget = mw.Title.newFromText("Template:Subst:" + mainText);
 						}
 						if (
-							allBanners.withoutRatings.includes(mainText) ||
-							allBanners.notWPBM.includes(mainText)
+							(allBanners.withoutRatings && allBanners.withoutRatings.includes(mainText)) ||
+							(allBanners.notWPBM && allBanners.notWPBM.includes(mainText))
 						) {
 							template.withoutRatings = true;
 						}
-						if ( allBanners.inactive.includes(mainText) ) {
+						if ( (allBanners.inactive && allBanners.inactive.includes(mainText)) ) {
 							template.inactiveProject = true;
 						}
 						return template;
@@ -167,7 +167,7 @@ var setupRater = function(clickEvent) {
 			}
 			return API.getORES(latestRevId)
 				.then(function(result) {
-					var data = result.enwiki.scores[latestRevId].articlequality;
+					var data = result.ruwiki.scores[latestRevId].articlequality;
 					if ( data.error ) {
 						return $.Deferred().reject(data.error.type, data.error.message);
 					}
@@ -175,7 +175,7 @@ var setupRater = function(clickEvent) {
 					const probabilities = data.score.probability;
 					if (prediction === "ДС" || prediction === "ХС" || prediction === "ИС") {
 						return {
-							prediction: "I или выше",
+							prediction: "I+",
 							probability: ((probabilities["ДС"] + probabilities["ХС"] + probabilities["ИС"] + probabilities.I)*100).toFixed(1)+"%"
 						};
 					}

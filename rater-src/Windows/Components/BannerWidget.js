@@ -59,7 +59,7 @@ function BannerWidget( template, config ) {
 	} );
 
 	this.mainLabelPopupButton = new OO.ui.PopupButtonWidget( {
-		label: `{{${template.getTitle().getMainText()}}}${this.inactiveProject ? " (inactive)" : ""}`,
+		label: `{{${template.getTitle().getMainText()}}}${this.inactiveProject ? " (неактивен)" : ""}`,
 		$element: $("<span style='display:inline-block;width:48%;margin-right:0;padding-right:8px'>"),
 		$overlay: this.$overlay,
 		indicator:"down",
@@ -96,7 +96,7 @@ function BannerWidget( template, config ) {
 			},
 			$overlay: this.$overlay,
 		} );
-		var classParam = template.parameters.find(parameter => parameter.name === "class");
+		var classParam = template.parameters.find(parameter => parameter.name === "уровень");
 		this.classDropdown.getMenu().selectItemByData( classParam && classMask(classParam.value) );
 	}
 
@@ -468,8 +468,8 @@ BannerWidget.prototype.makeWikitext = function() {
 
 	return ("{{" +
 		this.name +
-		( this.hasClassRatings && classVal!=null ? `${pipe}class${equals}${classVal||""}` : "" ) +
-		( this.hasImportanceRatings && importanceVal!=null ? `${pipe}importance${equals}${importanceVal||""}` : "" ) +
+		( this.hasClassRatings && classVal!=null ? `${pipe}уровень${equals}${classVal||""}` : "" ) +
+		( this.hasImportanceRatings && importanceVal!=null ? `${pipe}важность${equals}${importanceVal||""}` : "" ) +
 		this.parameterList.getParameterItems()
 			.map(parameter => parameter.makeWikitext(pipe, equals))
 			.join("") +

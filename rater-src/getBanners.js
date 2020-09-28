@@ -28,10 +28,36 @@ var getListOfBannersFromApi = function() {
 	var categories = [
 		{
 			title: "Категория:Шаблоны проектов:Баннеры",
-			abbreviation: "баннеры",
+			abbreviation: "withRatings",
 			banners: [],
 			processed: $.Deferred()
-		}
+		},
+		/*
+		{
+			title: "",
+			abbreviation: "withoutRatings",
+			banners: [],
+			processed: $.Deferred()
+		},
+		{
+			title: "",
+			abbreviation: "wrappers",
+			banners: [],
+			processed: $.Deferred()
+		},
+		{
+			title: "",
+			abbreviation: "notWPBM",
+			banners: [],
+			processed: $.Deferred()
+		},
+		{
+			title: "",
+			abbreviation: "inactive",
+			banners: [],
+			processed: $.Deferred()
+		},
+		*/
 	];
 
 	var processQuery = function(result, catIndex) {
@@ -44,7 +70,7 @@ var getListOfBannersFromApi = function() {
 		
 		// Gather titles into array - excluding "Template:" prefix
 		var resultTitles = result.query.categorymembers.map(function(info) {
-			return info.title.slice(9);
+			return info.title.slice(info.title.indexOf(":") + 1);
 		});
 		Array.prototype.push.apply(categories[catIndex].banners, resultTitles);
 		

@@ -65,7 +65,7 @@ LoadDialog.prototype.initialize = function () {
 		}).toggle(),
 	];
 	this.closeButton = new OO.ui.ButtonWidget( {
-		label: "Close"
+		label: "Закрыть"
 	}).toggle();
 	this.setupPromises = [];
 

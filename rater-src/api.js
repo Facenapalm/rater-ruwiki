@@ -145,7 +145,7 @@ var makeErrorMsg = function(first, second) {
 			message = errorObj.info;
 		} else if (first === "ok-but-empty") {
 			code = null;
-			message = "Got an empty response from the server";
+			message = "Получен пустой ответ сервера";
 		} else {
 			xhr = second && second.xhr;
 		}
@@ -165,7 +165,7 @@ var makeErrorMsg = function(first, second) {
 	} else if (typeof first === "string" && first !== "error") {
 		return `Error: ${first}`;
 	} else {
-		return "Unknown API error";
+		return "Неизвестная ошибка API";
 	}
 };
 

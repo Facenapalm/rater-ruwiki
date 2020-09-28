@@ -19,7 +19,7 @@ MainWindow.static.name = "main";
 MainWindow.static.title = $("<span>").css({"font-weight":"normal"}).append(
 	$("<a>").css({"font-weight": "bold"}).attr({"href": mw.util.getUrl("WP:RATER"), "target": "_blank"}).text("Rater"),
 	" (",
-	$("<a>").attr({"href": mw.util.getUrl("WT:RATER"), "target": "_blank"}).text("talk"),
+	$("<a>").attr({"href": mw.util.getUrl("Wikipedia Talk:RATER"), "target": "_blank"}).text("обсуждение"),
 	") ",
 	$("<span>").css({"font-size":"90%"}).text("v"+appConfig.script.version)
 );
@@ -745,7 +745,7 @@ MainWindow.prototype.makeEditSummary = function() {
 		: (someClassesChanged && overallClass) || (someImportancesChanged && overallImportance) || "";
 	if (overallRating) { overallRating = " (" + overallRating + ")"; }
 
-	return `Assessment${overallRating}: ${[...editedBanners, ...newBanners, ...removedBanners].join(", ")}${appConfig.script.advert}`;
+	return `Оценка${overallRating}: ${[...editedBanners, ...newBanners, ...removedBanners].join(", ")}${appConfig.script.advert}`;
 };
 
 export default MainWindow;

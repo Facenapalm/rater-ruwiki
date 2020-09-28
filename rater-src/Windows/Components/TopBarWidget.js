@@ -29,6 +29,7 @@ function TopBarWidget( config ) {
 				label: bannerName.replace("Статья проекта ", "").replace("Статья проекта:", "").replace("Проект ", ""),
 				data: {name: bannerName}
 			})),
+			/*
 			...banners.withoutRatings.map(bannerName => ({
 				label: bannerName.replace("Статья проекта ", "").replace("Статья проекта:", "").replace("Проект ", ""),
 				data: {
@@ -57,6 +58,7 @@ function TopBarWidget( config ) {
 					withoutRatings: true
 				}
 			}))
+			*/
 		])
 		.then(bannerOptions => this.searchBox.setSuggestions(bannerOptions));
     
