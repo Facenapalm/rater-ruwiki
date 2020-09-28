@@ -21,7 +21,7 @@ var autoStart = function autoStart() {
 		}
 		const subjectTitle = mw.Title.newFromText(config.mw.wgPageName).getSubjectPage();
 		// Check if subject page is the main page
-		if (subjectTitle.getPrefixedText() === "Main Page") {
+		if (subjectTitle.getPrefixedText() === "Заглавная страница") {
 			return;
 		}
 		// Check subject page namespace
@@ -60,7 +60,7 @@ var autoStart = function autoStart() {
 					return setupRater();
 				}
 			
-				var hasWikiproject = templates.some(template => /(WikiProject|WPBanner)/.test(template.title));
+				var hasWikiproject = templates.some(template => /(Статья проекта|Проект)/.test(template.title));
 			
 				if ( !hasWikiproject ) {
 					return setupRater();

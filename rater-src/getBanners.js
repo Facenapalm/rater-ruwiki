@@ -27,32 +27,8 @@ var getListOfBannersFromApi = function() {
 
 	var categories = [
 		{
-			title: "Category:WikiProject banners with quality assessment",
-			abbreviation: "withRatings",
-			banners: [],
-			processed: $.Deferred()
-		},
-		{
-			title: "Category:WikiProject banners without quality assessment",
-			abbreviation: "withoutRatings",
-			banners: [],
-			processed: $.Deferred()
-		},
-		{
-			title: "Category:WikiProject banner wrapper templates",
-			abbreviation: "wrappers",
-			banners: [],
-			processed: $.Deferred()
-		},
-		{
-			title: "Category:WikiProject banner templates not based on WPBannerMeta",
-			abbreviation: "notWPBM",
-			banners: [],
-			processed: $.Deferred()
-		},
-		{
-			title: "Category:Inactive WikiProject banners",
-			abbreviation: "inactive",
+			title: "Категория:Шаблоны проектов:Баннеры",
+			abbreviation: "баннеры",
 			banners: [],
 			processed: $.Deferred()
 		}

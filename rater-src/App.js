@@ -28,13 +28,13 @@ import windowManager from "./windowManager";
 				// Show notification when saved successfully
 				if (result && result.success) {
 					const $message = $("<span>").append(
-						$("<strong>").text("Ratings saved successfully.")
+						$("<strong>").text("Оценки успешно сохранены.")
 					);
 					if (result.upgradedStub) {
 						$message.append(
 							$("<br>"),
 							// TODO: There should be a link that will edit the article for you
-							$("<span>").text("Note that the article appears to be tagged as a stub.")
+							$("<span>").text("Обратите внимание, что статья, похоже, помечена как заготовка.")
 						);
 					}
 					mw.notify(
@@ -47,7 +47,7 @@ import windowManager from "./windowManager";
 
 	const showSetupError = (code, jqxhr) => OO.ui.alert(
 		makeErrorMsg(code, jqxhr),	{
-			title: "Rater failed to open"
+			title: "Не удалось открыть Rater"
 		}
 	);
 
@@ -57,7 +57,7 @@ import windowManager from "./windowManager";
 		"#",
 		"Rater",
 		"ca-rater",
-		"Rate quality and importance",
+		"Оценить качество и важность",
 		"5"
 	);
 	$("#ca-rater").click(event => {

@@ -28,7 +28,7 @@ MainWindow.static.actions = [
 	// Primary (top right):
 	{
 		label: "X", // not using an icon since color becomes inverted, i.e. white on light-grey
-		title: "Close (and discard any changes)",
+		title: "Закрыть (и потерять все изменнеия)",
 		flags: "primary",
 		modes: ["edit", "diff", "preview"] // available when current mode isn't "prefs"
 	},
@@ -37,45 +37,45 @@ MainWindow.static.actions = [
 		action: "showPrefs",
 		flags: "safe",
 		icon: "settings",
-		title: "Preferences",
+		title: "Настройки",
 		modes: ["edit", "diff", "preview"] // available when current mode isn't "prefs"
 	},
 	// Others (bottom)
 	{
 		action: "save",
 		accessKey: "s",
-		label: new OO.ui.HtmlSnippet("<span style='padding:0 1em;'>Save</span>"),
+		label: new OO.ui.HtmlSnippet("<span style='padding:0 1em;'>Сохранить</span>"),
 		flags: ["primary", "progressive"],
 		modes: ["edit", "diff", "preview"] // available when current mode isn't "prefs"
 	},
 	{
 		action: "preview",
 		accessKey: "p",
-		label: "Show preview",
+		label: "Предпросмотр",
 		modes: ["edit", "diff"] // available when current mode isn't "preview" or "prefs"
 	},
 	{
 		action: "changes",
 		accessKey: "v",
-		label: "Show changes",
+		label: "Внесённые изменения",
 		modes: ["edit", "preview"] // available when current mode isn't "diff" or "prefs"
 	},
 	{
 		action: "back",
-		label: "Back",
+		label: "Назад",
 		modes: ["diff", "preview"] // available when current mode is "diff" or "prefs"
 	},
 	
 	// "prefs" mode only
 	{
 		action: "savePrefs",
-		label: "Update",
+		label: "Обновить",
 		flags: ["primary", "progressive"],
 		modes: "prefs" 
 	},
 	{
 		action: "closePrefs",
-		label: "Cancel",
+		label: "Отменить",
 		flags: "safe",
 		modes: "prefs"
 	}
@@ -106,8 +106,8 @@ MainWindow.prototype.initialize = function () {
 						.css({"vertical-align": "text-bottom;"})
 						.attr({
 							"src": "//upload.wikimedia.org/wikipedia/commons/thumb/5/51/Objective_Revision_Evaluation_Service_logo.svg/40px-Objective_Revision_Evaluation_Service_logo.svg.png",
-							"title": "Machine predicted quality from ORES",
-							"alt": "ORES logo",
+							"title": "Предсказанное нейросетью ORES качество",
+							"alt": "Логотип ORES",
 							"width": "20px",
 							"height": "20px"
 						})
@@ -144,7 +144,7 @@ MainWindow.prototype.initialize = function () {
 
 	// Preview, Show changes
 	this.parsedContentContainer = new OO.ui.FieldsetLayout( {
-		label: "Preview"
+		label: "Предпросмотр"
 	} );
 	this.parsedContentWidget = new OO.ui.LabelWidget( {label: "",	$element:$("<div>")	});
 	this.parsedContentContainer.addItems([
@@ -306,7 +306,7 @@ MainWindow.prototype.getSetupProcess = function ( data ) {
 			// Set up edit mode banners
 			this.actions.setMode("edit");
 			this.bannerList.oresClass = (data.isArticle && data.isList)
-				? "List"
+				? "Список"
 				: data.ores && data.ores.prediction;
 			this.bannerList.pageInfo = this.pageInfo;
 			this.bannerList.addItems(
@@ -328,28 +328,30 @@ MainWindow.prototype.getSetupProcess = function ( data ) {
 			}
 			// Show page type, or ORES prediction, if available
 			if (this.pageInfo.redirect) {
-				this.pagetypeLabel.setLabel("Redirect page").toggle(true);
+				this.pagetypeLabel.setLabel("Перенаправление").toggle(true);
 			} else if (this.pageInfo.isDisambig) {
-				this.pagetypeLabel.setLabel("Disambiguation page").toggle(true);
+				this.pagetypeLabel.setLabel("Страница значений").toggle(true);
+			} else if (this.pageInfo.isArticle && data.isNA) {
+				this.pagetypeLabel.setLabel("Добротная статья").toggle(true);
 			} else if (this.pageInfo.isArticle && data.isGA) {
-				this.pagetypeLabel.setLabel("Good article").toggle(true);
+				this.pagetypeLabel.setLabel("Хорошая статья").toggle(true);
 			} else if (this.pageInfo.isArticle && data.isFA) {
-				this.pagetypeLabel.setLabel("Featured article").toggle(true);
+				this.pagetypeLabel.setLabel("Избранная статья").toggle(true);
 			} else if (this.pageInfo.isArticle && data.isFL) {
-				this.pagetypeLabel.setLabel("Featured list").toggle(true);
+				this.pagetypeLabel.setLabel("Избранный список").toggle(true);
 			} else if (this.pageInfo.isArticle && data.isList) {
-				this.pagetypeLabel.setLabel("List article").toggle(true);
+				this.pagetypeLabel.setLabel("Информационный список").toggle(true);
 			} else if (data.ores) {
 				this.oresClass = data.ores.prediction;
 				this.oresLabel.toggle(true).$element.find(".oresPrediction").append(
-					"Prediction: ",
+					"Предсказание: ",
 					$("<strong>").text(data.ores.prediction),
 					"&nbsp;(" + data.ores.probability + ")"
 				);
 			} else if (this.pageInfo.isArticle) {
-				this.pagetypeLabel.setLabel("Article page").toggle(true);
+				this.pagetypeLabel.setLabel("Статья").toggle(true);
 			} else {
-				this.pagetypeLabel.setLabel( this.subjectPage.getNamespacePrefix().slice(0,-1) + " page" ).toggle(true);
+				this.pagetypeLabel.setLabel( "Страница пространства " + this.subjectPage.getNamespacePrefix().slice(0,-1) ).toggle(true);
 			}
 			// Set props for use in making wikitext and edit summaries
 			this.talkWikitext = data.talkWikitext;
@@ -391,7 +393,7 @@ MainWindow.prototype.getActionProcess = function ( action ) {
 				(code, err) => $.Deferred().reject(
 					new OO.ui.Error(
 						$("<div>").append(
-							$("<strong style='display:block;'>").text("Could not save preferences."),
+							$("<strong style='display:block;'>").text("Не удалось сохранить настройки."),
 							$("<span style='color:#777'>").text( makeErrorMsg(code, err) )
 						)
 					)
@@ -427,7 +429,7 @@ MainWindow.prototype.getActionProcess = function ( action ) {
 			).catch((code, err) => $.Deferred().reject(
 				new OO.ui.Error(
 					$("<div>").append(
-						$("<strong style='display:block;'>").text("Could not save your changes."),
+						$("<strong style='display:block;'>").text("Не удалось сохранить изменения."),
 						$("<span style='color:#777'>").text( makeErrorMsg(code, err) )
 					)
 				)
@@ -442,7 +444,7 @@ MainWindow.prototype.getActionProcess = function ( action ) {
 			API.post({
 				action: "parse",
 				contentmodel: "wikitext",
-				text: this.transformTalkWikitext(this.talkWikitext) + "\n<hr>\n" + "'''Edit summary:''' " + this.makeEditSummary(),
+				text: this.transformTalkWikitext(this.talkWikitext) + "\n<hr>\n" + "'''Описание правки:''' " + this.makeEditSummary(),
 				title: this.talkpage.getPrefixedText(),
 				pst: 1
 			}).then( result => {
@@ -452,7 +454,7 @@ MainWindow.prototype.getActionProcess = function ( action ) {
 				var previewHtmlSnippet = new OO.ui.HtmlSnippet(result.parse.text["*"]);
 
 				this.parsedContentWidget.setLabel(previewHtmlSnippet);
-				this.parsedContentContainer.setLabel("Preview:");
+				this.parsedContentContainer.setLabel("Предпросмотр:");
 				this.actions.setMode("preview");
 				this.contentArea.setItem( this.parsedContentLayout );
 				this.topBar.setDisabled(true);
@@ -461,7 +463,7 @@ MainWindow.prototype.getActionProcess = function ( action ) {
 				.catch( (code, err) => $.Deferred().reject(
 					new OO.ui.Error(
 						$("<div>").append(
-							$("<strong style='display:block;'>").text("Could not show changes."),
+							$("<strong style='display:block;'>").text("Не удалось отобразить изменения."),
 							$("<span style='color:#777'>").text( makeErrorMsg(code, err) )
 						)
 					)
@@ -485,14 +487,14 @@ MainWindow.prototype.getActionProcess = function ( action ) {
 					}
 					var $diff = $("<table>").css("width", "100%").append(
 						$("<tr>").append(
-							$("<th>").attr({"colspan":"2", "scope":"col"}).css("width", "50%").text("Latest revision"),
-							$("<th>").attr({"colspan":"2", "scope":"col"}).css("width", "50%").text("New text")
+							$("<th>").attr({"colspan":"2", "scope":"col"}).css("width", "50%").text("Последняя версия"),
+							$("<th>").attr({"colspan":"2", "scope":"col"}).css("width", "50%").text("Новый текст")
 						),
 						result.compare["*"],
 						$("<tfoot>").append(
 							$("<tr>").append(
 								$("<td colspan='4'>").append(
-									$("<strong>").text("Edit summary: "),
+									$("<strong>").text("Описание правки: "),
 									this.makeEditSummary()
 								)
 							)
@@ -500,7 +502,7 @@ MainWindow.prototype.getActionProcess = function ( action ) {
 					);
 
 					this.parsedContentWidget.setLabel($diff);
-					this.parsedContentContainer.setLabel("Changes:");
+					this.parsedContentContainer.setLabel("Изменения:");
 					this.actions.setMode("diff");
 					this.contentArea.setItem( this.parsedContentLayout );
 					this.topBar.setDisabled(true);
@@ -509,7 +511,7 @@ MainWindow.prototype.getActionProcess = function ( action ) {
 				.catch( (code, err) => $.Deferred().reject(
 					new OO.ui.Error(
 						$("<div>").append(
-							$("<strong style='display:block;'>").text("Could not show changes."),
+							$("<strong style='display:block;'>").text("Не удалось отобразить изменения."),
 							$("<span style='color:#777'>").text( makeErrorMsg(code, err) )
 						)
 					)
@@ -525,7 +527,7 @@ MainWindow.prototype.getActionProcess = function ( action ) {
 	} else if (!action && this.bannerList.changed) {
 		// Confirm closing of dialog if there have been changes 
 		return new OO.ui.Process().next(
-			OO.ui.confirm("Changes made will be discarded.", {title:"Close Rater?"})
+			OO.ui.confirm("Все изменения будут потеряны.", {title:"Закрыть Rater?"})
 				.then(confirmed => confirmed ? this.close() : null)
 		);
 	}
@@ -575,19 +577,19 @@ MainWindow.prototype.onSearchSelect = function(data) {
 	// Abort and show alert if banner already exists
 	if (existingBanner) {
 		this.topBar.searchBox.popPending();
-		return OO.ui.alert("There is already a {{" + name + "}} banner").then(this.searchBox.focus());
+		return OO.ui.alert("На странице уже есть баннер {{" + name + "}}").then(this.searchBox.focus());
 	}
 
 	// Confirmation required for banners missing WikiProject from name, and for uncreated disambiguation talk pages
 	var confirmText;
-	if (!/^[Ww](?:P|iki[Pp]roject)/.test(name)) {
+	if (!/^[Сс]татья проекта|[Пп]роект/.test(name)) {
 		confirmText = new OO.ui.HtmlSnippet(
-			"{{" + name + "}} is not a recognised WikiProject banner.<br/>Do you want to continue?"
+			"Шаблон {{" + name + "}} не распознан как баннер проекта.<br>Продолжить?"
 		);
-	} else if (name === "WikiProject Disambiguation" && $("#ca-talk.new").length !== 0 && this.bannerList.items.length === 0) {
+	} /* else if (name === "WikiProject Disambiguation" && $("#ca-talk.new").length !== 0 && this.bannerList.items.length === 0) {
 		// eslint-disable-next-line no-useless-escape
 		confirmText = "New talk pages shouldn't be created if they will only contain the \{\{WikiProject Disambiguation\}\} banner. Continue?";
-	}
+	} */
 	$.when( confirmText ? OO.ui.confirm(confirmText) : true)
 		.then( confirmed => {
 			if (!confirmed) return;
@@ -661,7 +663,7 @@ MainWindow.prototype.transformTalkWikitext = function(talkWikitext) {
 	talkTemplates.forEach(template => {
 		tempStr = tempStr.replace(template.wikitext, "");
 	});
-	if (/^#REDIRECT/i.test(talkWikitext) || !tempStr.trim()) {
+	if (/^#(REDIRECT|перенаправление)/i.test(talkWikitext) || !tempStr.trim()) {
 		// Is a redirect, or everything is a template: insert at the end
 		return talkWikitext.trim() + "\n" + bannersWikitext.trim();
 	} else {
@@ -674,7 +676,7 @@ MainWindow.prototype.isRatedAndNotStub = function() {
 	const nonStubRatinggs = this.bannerList.items.filter(banner =>
 		banner.hasClassRatings &&
 		banner.classDropdown.getValue() &&
-		banner.classDropdown.getValue() !== "Stub"
+		banner.classDropdown.getValue() !== "IV"
 	);
 	return nonStubRatinggs.length > 0;
 };
@@ -683,7 +685,7 @@ MainWindow.prototype.makeEditSummary = function() {
 	const removedBanners = [];
 	const editedBanners = [];
 	const newBanners = [];
-	const shortName = name => name.replace("WikiProject ","").replace("Subst:","");
+	const shortName = name => name.replace("Статья проекта ","").replace("Статья проекта:","").replace("Проект ","").replace("Subst:","");
 
 	// Overall class/importance, if all the same
 	const allClasses = uniqueArray(

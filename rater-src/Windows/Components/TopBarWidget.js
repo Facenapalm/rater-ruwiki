@@ -19,39 +19,39 @@ function TopBarWidget( config ) {
     
 	// Search box
 	this.searchBox = new SuggestionLookupTextInputWidget( {
-		placeholder: "Add a WikiProject...",
+		placeholder: "Добавить проект...",
 		$element: $("<div style='display:inline-block; margin:0 -1px; width:calc(100% - 55px);'>"),
 		$overlay: this.$overlay,
 	} );
 	getBannerNames()
 		.then(banners => [
 			...banners.withRatings.map(bannerName => ({
-				label: bannerName.replace("WikiProject ", ""),
+				label: bannerName.replace("Статья проекта ", "").replace("Статья проекта:", "").replace("Проект ", ""),
 				data: {name: bannerName}
 			})),
 			...banners.withoutRatings.map(bannerName => ({
-				label: bannerName.replace("WikiProject ", ""),
+				label: bannerName.replace("Статья проекта ", "").replace("Статья проекта:", "").replace("Проект ", ""),
 				data: {
 					name: bannerName,
 					withoutRatings: true
 				}
 			})),
 			...banners.wrappers.map(bannerName => ({
-				label: bannerName.replace("WikiProject ", "") + " [template wrapper]",
+				label: bannerName.replace("Статья проекта ", "").replace("Статья проекта:", "").replace("Проект ", "") + " [шаблон-обёртка]",
 				data: {
 					name: bannerName,
 					wrapper: true
 				}
 			})),
 			...banners.notWPBM.map(bannerName => ({
-				label: bannerName.replace("WikiProject ", ""),
+				label: bannerName.replace("Статья проекта ", "").replace("Статья проекта:", "").replace("Проект ", ""),
 				data: {
 					name: bannerName,
 					withoutRatings: true
 				}
 			})),
 			...banners.inactive.map(bannerName => ({
-				label: bannerName.replace("WikiProject ", "") + " [inactive]",
+				label: bannerName.replace("Статья проекта ", "").replace("Статья проекта:", "").replace("Проект ", "") + " [неактивен]",
 				data: {
 					name: bannerName,
 					withoutRatings: true
@@ -63,7 +63,7 @@ function TopBarWidget( config ) {
 	// Add button
 	this.addBannerButton = new OO.ui.ButtonWidget( {
 		icon: "add",
-		title: "Add",
+		title: "Добавить",
 		flags: "progressive",
 		$element: $("<span style='float:right;margin: 0;transform: translateX(-12px);'>"),
 	} );
@@ -74,16 +74,16 @@ function TopBarWidget( config ) {
 	// in the style of a popup button with a menu (is actually a dropdown with a hidden label, because that makes the coding easier.)
 	this.setAllDropDown = new OO.ui.DropdownWidget( {
 		icon: "tag",
-		label: "Set all...",
+		label: "Установить всем...",
 		invisibleLabel: true,
 		menu: {
 			items: [
 				new OO.ui.MenuSectionOptionWidget( {
-					label: "Classes"
+					label: "Уровни"
 				} ),
 				new OO.ui.MenuOptionWidget( {
 					data: {class: null},
-					label: new OO.ui.HtmlSnippet("<span style=\"color:#777\">(no class)</span>")
+					label: new OO.ui.HtmlSnippet("<span style=\"color:#777\">(уровень не указан)</span>")
 				} ),
 				...appConfig.bannerDefaults.classes.map(classname => new OO.ui.MenuOptionWidget( {
 					data: {class: classname},
@@ -91,11 +91,11 @@ function TopBarWidget( config ) {
 				} )
 				),
 				new OO.ui.MenuSectionOptionWidget( {
-					label: "Importances"
+					label: "Важность"
 				} ),
 				new OO.ui.MenuOptionWidget( {
 					data: {importance: null},
-					label: new OO.ui.HtmlSnippet("<span style=\"color:#777\">(no importance)</span>")
+					label: new OO.ui.HtmlSnippet("<span style=\"color:#777\">(важность не указана)</span>")
 				} ),
 				...appConfig.bannerDefaults.importances.map(importance => new OO.ui.MenuOptionWidget( {
 					data: {importance: importance},
@@ -104,21 +104,21 @@ function TopBarWidget( config ) {
 				)
 			]
 		},
-		$element: $("<span style=\"width:auto;display:inline-block;float:left;margin:0\" title='Set all...'>"),
+		$element: $("<span style=\"width:auto;display:inline-block;float:left;margin:0\" title='Установить всем...'>"),
 		$overlay: this.$overlay,
 	} );
 
 	// Remove all banners button
 	this.removeAllButton = new OO.ui.ButtonWidget( {
 		icon: "trash",
-		title: "Remove all",
+		title: "Удалить все",
 		flags: "destructive"
 	} );
 
 	// Clear all parameters button
 	this.clearAllButton = new OO.ui.ButtonWidget( {
 		icon: "cancel",
-		title: "Clear all",
+		title: "Очистить все",
 		flags: "destructive"
 	} );
 

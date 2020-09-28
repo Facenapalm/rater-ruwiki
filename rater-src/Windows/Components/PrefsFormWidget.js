@@ -10,73 +10,73 @@ function PrefsFormWidget( config ) {
 	this.$element.addClass("rater-prefsFormWidget");
 
 	this.layout =  new OO.ui.FieldsetLayout( {
-		label: "Preferences",
+		label: "Настройки",
 		$element: this.$element
 	} );
 
 	this.preferences = {
 		"autostart": {
 			input: new OO.ui.ToggleSwitchWidget(),
-			label: "Autostart Rater"
+			label: "Автозапуск Rater"
 		},
 		"autostartRedirects": {
 			input: new OO.ui.ToggleSwitchWidget(),
-			label: "Autostart on redirects"
+			label: "Автозапуск в перенаправлениях"
 		},
 		"autostartNamespaces": {
 			input: new mw.widgets.NamespacesMultiselectWidget(),
-			label: "Autostart in these namespaces"
+			label: "Автозапуск в этих пространствах имён"
 		},
 		"minForShell": {
 			input: new OO.ui.NumberInputWidget( { "min": 2 } ),
-			label: "Minimum number of banners for WikiProject banner shell"
+			label: "Минимальное число баннеров для оборачивания их в шаблон-обёртку"
 		},
 		"bypassRedirects": {
 			input: new OO.ui.ToggleSwitchWidget(),
-			label: "Bypass redirects to banners"
+			label: "Обходить перенаправления на баннеры"
 		},
 		"autofillClassFromOthers":  {
 			input: new OO.ui.ToggleSwitchWidget(),
-			label: "Autofill class from other banners"
+			label: "Автоматически заполнять уровень по другим шаблонам"
 		},
 		"autofillClassFromOres": {
 			input: new OO.ui.ToggleSwitchWidget(),
-			label: "Autofill class based on ORES prediction"
+			label: "Автоматически заполнять уровень по предсказанию ORES"
 		},
 		"autofillImportance": {
 			input: new OO.ui.ToggleSwitchWidget(),
-			label: "Autofill low importance"
+			label: "Автоматически заполнять низкую важность"
 		},
 		"collapseParamsLowerLimit": {
 			input: new OO.ui.NumberInputWidget( { "min": 1 } ),
-			label: "Minimum number of parameters to show uncollapsed"
+			label: "Минимальное количество параметров, показываемых несвёрнутыми"
 		},
 		"watchlist": {
 			input: new OO.ui.ButtonSelectWidget( {
 				items: [
 					new OO.ui.ButtonOptionWidget( {
 						data: "preferences",
-						label: "Default",
-						title: "Uses the same setting as if you manually edited the page, as per Special:Preferences"
+						label: "По-умолчанию",
+						title: "Использует те же настройки, как и при ручном редактировании страницы, согласно Служебная:Настройки"
 					} ),
 					new OO.ui.ButtonOptionWidget( {
 						data: "watch",
-						label: "Always",
-						title: "Always add pages Rater edits to your watchlist"
+						label: "Всегда",
+						title: "Всегда добавлять страницы, отредактированные с помощью Rater, в ваш список наблюдения"
 					} ),
 					new OO.ui.ButtonOptionWidget( {
 						data: "nochange",
-						label: "Never",
-						title: "Never add pages Rater edit to your watchlist"
+						label: "Никогда",
+						title: "Никогда не добавлять страницы, отредактированные с помощью Rater, в ваш список наблюдения"
 					} ),
 				]
 			}).selectItemByData("preferences"),
-			label: "Add edited pages to watchlist"
+			label: "Добавлять редактируемые страницы в список наблюдения"
 		},
 		"resetCache": {
 			input: new OO.ui.ButtonWidget( {
-				label: "Reset cache",
-				title: "Remove cached data, including list of WikiProjects and template parameters",
+				label: "Сбросить кэш",
+				title: "Удалить все закэшированные данные, включая список проектов и параметров шаблонов",
 				flags: ["destructive"]
 			} )
 		}
@@ -113,7 +113,7 @@ PrefsFormWidget.prototype.setPrefValues = function(prefs) {
 				input.addTag(
 					ns.toString(),
 					ns === 0
-						? "(Main)"
+						? "(Основное)"
 						: config.mw.wgFormattedNamespaces[ns]
 				)
 			);
@@ -147,7 +147,7 @@ PrefsFormWidget.prototype.getPrefs = function() {
 };
 
 PrefsFormWidget.prototype.onResetCacheClick = function() {
-	OO.ui.confirm("After reseting cache, Rater will close and restart. Any changes made will be discarded.")
+	OO.ui.confirm("После очистки кэша Rater закроется и перезапустится. Все изменения будут потеряны.")
 		.then(confirmed => {
 			if (confirmed) { 
 				this.emit("resetCache");

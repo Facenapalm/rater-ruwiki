@@ -7,7 +7,7 @@ var config = {
 	// Script info
 	script: {
 		// Advert to append to edit summaries
-		advert:  ` ([[WP:RATER#${version}|Rater]])`,
+		advert:  ` ([[:en:WP:RATER#${version}|Rater]])`,
 		version: version
 	},
 	// Default preferences, if user subpage raterPrefs.json does not exist
@@ -39,129 +39,30 @@ var config = {
 	] ),
 	bannerDefaults: {
 		classes: [
-			"FA",
-			"FL",
-			"A",
-			"GA",
-			"B",
-			"C",
-			"Start",
-			"Stub",
-			"List"
+			"ИС",
+			"ХС",
+			"ДС",
+			"I",
+			"II",
+			"III",
+			"IV",
+			"ИСП",
+			"Список"
 		],
 		importances: [
-			"Top",
-			"High",
-			"Mid",
-			"Low"
+			"высшая",
+			"высокая",
+			"средняя",
+			"низкая"
 		],
 		extendedClasses: [
-			"Category",
-			"Draft",
-			"File",
-			"FM",
-			"Portal",
-			"Project",
-			"Template",
-			"Bplus",
-			"Future",
-			"Current",
-			"Disambig",
-			"NA",
-			"Redirect",
-			"Book"
 		],
 		extendedImportances: [
-			"Top",
-			"High",
-			"Mid",
-			"Low",
-			"Bottom",
-			"NA"
 		]
 	},
 	customBanners: {
-		"WikiProject Military history": {
-			classes: [
-				"FA",
-				"FL",
-				"A",
-				"GA",
-				"B",
-				"C",
-				"Start",
-				"Stub",
-				"List",
-				"AL",
-				"BL",
-				"CL",
-				"Category",
-				"Draft",
-				"File",
-				"Portal",
-				"Project",
-				"Template",
-				"Disambig",
-				"Redirect",
-				"Book"			
-			],
-			importances: []
-		},
-		"WikiProject Portals": {
-			classes: [
-				"FPo",
-				"Complete",
-				"Substantial",
-				"Basic",
-				"Incomplete",
-				"Meta",
-				"List",
-				"Category",
-				"Draft",
-				"File",
-				"Project",
-				"Template",
-				"Disambig",
-				"NA",
-				"Redirect"
-			],
-			importances: [
-				"Top",
-				"High",
-				"Mid",
-				"Low",
-				"Bottom",
-				"NA"
-			]
-		}
 	},
 	shellTemplates: [
-		"WikiProject banner shell",
-		"WikiProjectBanners",
-		"WikiProject Banners",
-		"WPB",
-		"WPBS",
-		"Wikiprojectbannershell",
-		"WikiProject Banner Shell",
-		"Wpb",
-		"WPBannerShell",
-		"Wpbs",
-		"Wikiprojectbanners",
-		"WP Banner Shell",
-		"WP banner shell",
-		"Bannershell",
-		"Wikiproject banner shell",
-		"WikiProject Banners Shell",
-		"WikiProjectBanner Shell",
-		"WikiProjectBannerShell",
-		"WikiProject BannerShell",
-		"WikiprojectBannerShell",
-		"WikiProject banner shell/redirect",
-		"WikiProject Shell",
-		"Banner shell",
-		"Scope shell",
-		"Project shell",
-		"WikiProject banner"
 	],
 	defaultParameterData: {
 		"auto": {

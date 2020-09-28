@@ -44,7 +44,7 @@ Template.prototype.setName = function(name) {
 	this.name = name.trim();
 };
 Template.prototype.getTitle = function() {
-	return mw.Title.newFromText("Template:" + this.name);
+	return mw.Title.newFromText("Шаблон:" + this.name);
 };
 
 /**
@@ -380,7 +380,7 @@ Template.prototype.setParamDataAndSuggestions = function() {
 				return key;
 			});
 			self.parameterSuggestions = allParamsArray.filter(function(paramName) {
-				return ( paramName && paramName !== "class" && paramName !== "importance" );
+				return ( paramName && paramName !== "уровень" && paramName !== "важность" );
 			})
 				.map(function(paramName) {
 					var optionObject = {data: paramName};
@@ -413,6 +413,8 @@ Template.prototype.setParamDataAndSuggestions = function() {
 	return paramDataSet;	
 };
 
+/*
+
 var makeListAs = function(subjectTitle) {
 	var name = subjectTitle.getMainText().replace(/\s\(.*\)/, "");
 	if ( name.indexOf(" ") === -1 ) {
@@ -431,10 +433,13 @@ var makeListAs = function(subjectTitle) {
 	return lastName + ", " + otherNames + generationalSuffix;
 };
 
+*/
+
 Template.prototype.addMissingParams = function() {
 	var thisTemplate = this;
 
 	// Autofill listas parameter for WP:BIO
+	/*
 	var isBiographyBanner = this.getTitle().getMainText() === "WikiProject Biography" ||
 		(this.redirectTarget && this.redirectTarget.getMainText() === "WikiProject Biography");
 
@@ -446,6 +451,7 @@ Template.prototype.addMissingParams = function() {
 			autofilled: true,
 		});
 	}
+	*/
 
 	// Make sure required/suggested parameters are present
 	$.each(thisTemplate.paramData, function(paraName, paraData) {
@@ -514,7 +520,7 @@ Template.prototype.setClassesAndImportances = function() {
 
 	var wikitextToParse = "";	
 	config.bannerDefaults.extendedClasses.forEach(function(classname, index) {
-		wikitextToParse += "{{" + mainText + "|class=" + classname + "|importance=" +
+		wikitextToParse += "{{" + mainText + "|уровень=" + classname + "|важность=" +
 		(config.bannerDefaults.extendedImportances[index] || "") + "}}/n";
 	});
 	
@@ -527,11 +533,11 @@ Template.prototype.setClassesAndImportances = function() {
 		.then((result) => {
 			var catsHtml = result.parse.categorieshtml["*"];
 			var extendedClasses = config.bannerDefaults.extendedClasses.filter(function(cl) {
-				return catsHtml.indexOf(cl+"-Class") !== -1;
+				return catsHtml.indexOf("уровень " + cl) !== -1 || catsHtml.indexOf(cl + " уровень") !== -1;
 			});
 			this.classes = [...config.bannerDefaults.classes, ...extendedClasses];
 			this.importances = config.bannerDefaults.extendedImportances.filter(function(imp) {
-				return catsHtml.indexOf(imp+"-importance") !== -1;
+				return catsHtml.indexOf("важность " + imp) !== -1 || catsHtml.indexOf(imp + " важность") !== -1;
 			});
 			cache.write(mainText+"-ratings",
 				{

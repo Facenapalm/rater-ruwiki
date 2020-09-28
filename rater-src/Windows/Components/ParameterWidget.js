@@ -74,7 +74,7 @@ function ParameterWidget( parameter, paramData, config ) {
 
 	this.confirmButton = new OO.ui.ButtonWidget({
 		icon: "check",
-		label: "Done",
+		label: "Готово",
 		framed: false,
 		flags: "progressive",
 		$element: $("<span style='margin-right:0'>")
@@ -82,13 +82,13 @@ function ParameterWidget( parameter, paramData, config ) {
 
 	this.cancelButton = new OO.ui.ButtonWidget({
 		icon: "undo",
-		label: "Cancel",
+		label: "Отмена",
 		framed: false,
 	});
 
 	this.deleteButton = new OO.ui.ButtonWidget({
 		icon: this.isRequired ? "restore" : "trash",
-		label: this.isRequired ? "Required parameter" : "Delete",
+		label: this.isRequired ? "Требуется параметр" : "Удалить",
 		framed: false,
 		flags: "destructive",
 		disabled: this.isRequired
@@ -128,7 +128,7 @@ function ParameterWidget( parameter, paramData, config ) {
 
 	this.invalidIcon = new OO.ui.IconWidget( {
 		icon: "block",
-		title: "Invalid parameter: no value specified!",
+		title: "Некорректный параметр: значение не указано!",
 		flags: "destructive",
 		$element: $("<span style='margin: 0 5px 0 -5px; min-width: 16px; width: 16px;'>")
 	} ).toggle(this.isInvalid);
@@ -142,7 +142,7 @@ function ParameterWidget( parameter, paramData, config ) {
 	});
 	this.autofilledIcon = new OO.ui.IconWidget( {
 		icon: "robot",
-		title: "Autofilled by Rater",
+		title: "Автоматически заполнено Rater",
 		flags: "progressive",
 		$element: $("<span style='margin: 0 -5px 0 5px;min-width: 16px;width: 16px;'>")
 	} ).toggle(this.autofilled);

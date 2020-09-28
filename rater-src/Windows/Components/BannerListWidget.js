@@ -117,12 +117,14 @@ BannerListWidget.prototype.addItems = function ( items, index ) {
 			{preferences: this.preferences}
 		).then(shellBannerWidget => {
 			OO.ui.mixin.GroupElement.prototype.addItems.call( this, [shellBannerWidget], 0 );
+			/*
 			var biographyBanner =  this.items.find(
 				banner => banner.mainText === "WikiProject Biography" || banner.redirectTargetMainText === "WikiProject Biography"
 			);
 			if (biographyBanner) {
 				this.syncShellTemplateWithBiographyBanner(biographyBanner);
 			}
+			*/
 			// emit updatedSize event 
 			this.onUpdatedSize();
 		});
@@ -166,7 +168,7 @@ BannerListWidget.prototype.autofillClassRatings = function() {
 	} else if (uniqueClassRatings.length === 0 && this.preferences.autofillClassFromOres && this.oresClass) {
 		// Don't autofill above C-class
 		switch(this.oresClass) {
-		case "Stub": case "Start": case "C": case "List":
+		case "IV": case "III": case "II": case "Список":
 			autoClass = this.oresClass;
 		}
 	} else {
@@ -197,7 +199,7 @@ BannerListWidget.prototype.autofillImportanceRatings = function() {
 	}
 	// TODO: Should try to find a smarter, banner-specific way of determining importance.
 	// Maybe do something with  ORES's "drafttopic" model.
-	const autoImportance = "Low";
+	const autoImportance = "Низкая";
 	this.items.forEach(banner => {
 		if (!banner.hasImportanceRatings) {
 			return;

@@ -106,11 +106,12 @@ var setupRater = function(clickEvent) {
 		titles: subjectPage.getPrefixedText(),
 		redirects: 1,
 		clcategories: [
-			"Category:All disambiguation pages",
-			"Category:All stub articles",
-			"Category:Good articles",
-			"Category:Featured articles",
-			"Category:Featured lists"
+			"Категория:Страницы значений по алфавиту",
+			"Категория:Википедия:Добротные статьи по алфавиту",
+			"Категория:Википедия:Хорошие статьи по алфавиту",
+			"Категория:Википедия:Избранные статьи по алфавиту",
+			"Категория:Википедия:Избранные списки по алфавиту",
+			"Категория:Информационные списки по алфавиту"
 		]
 	}).then(response => {
 		if ( !response || !response.query || !response.query.pages ) {
@@ -124,12 +125,13 @@ var setupRater = function(clickEvent) {
 		const hasCategory = category => page.categories && page.categories.find(cat => cat.title === "Category:"+category);
 		return {
 			redirectTarget,
-			disambig: hasCategory("All disambiguation pages"),
-			stubtag: hasCategory("All stub articles"),
-			isGA: hasCategory("Good articles"),
-			isFA: hasCategory("Featured articles"),
-			isFL: hasCategory("Featured lists"),
-			isList: !hasCategory("Featured lists") && /^Lists? of/.test(subjectPage.getPrefixedText())
+			disambig: hasCategory("Страницы значений по алфавиту"),
+			stubtag: false, // TODO ?
+			isNA: hasCategory("Категория:Википедия:Добротные статьи по алфавиту"),
+			isGA: hasCategory("Википедия:Хорошие статьи по алфавиту"),
+			isFA: hasCategory("Википедия:Избранные статьи по алфавиту"),
+			isFL: hasCategory("Википедия:Избранные списки по алфавиту"),
+			isList: hasCategory("Информационные списки по алфавиту")
 		};
 	}).catch(() => null); // Failure ignored
 
@@ -171,10 +173,10 @@ var setupRater = function(clickEvent) {
 					}
 					const prediction = data.score.prediction;
 					const probabilities = data.score.probability;
-					if (prediction === "FA" || prediction === "GA") {
+					if (prediction === "ДС" || prediction === "ХС" || prediction === "ИС") {
 						return {
-							prediction: "B or higher",
-							probability: ((probabilities.FA + probabilities.GA + probabilities.B)*100).toFixed(1)+"%"
+							prediction: "I или выше",
+							probability: ((probabilities["ДС"] + probabilities["ХС"] + probabilities["ИС"] + probabilities.I)*100).toFixed(1)+"%"
 						};
 					}
 					return {
@@ -224,7 +226,7 @@ var setupRater = function(clickEvent) {
 			if (subjectPageCheck) {
 				result = { ...result, ...subjectPageCheck };
 			}
-			if (oresPredicition && subjectPageCheck && !subjectPageCheck.isGA && !subjectPageCheck.isFA && !subjectPageCheck.isFL) {
+			if (oresPredicition && subjectPageCheck && !subjectPageCheck.isNA && !subjectPageCheck.isGA && !subjectPageCheck.isFA && !subjectPageCheck.isFL) {
 				result.ores = oresPredicition;
 			}
 			windowManager.closeWindow("loadDialog", result);

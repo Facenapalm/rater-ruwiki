@@ -28,10 +28,13 @@
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
     "babelify": "^10.0.0",
-    "browserify": "^16.5.0",
+    "browserify": "^16.5.2",
     "concat-cli": "^4.0.0",
     "eslint": "^6.8.0",
-    "jshint": "^2.11.0",
+    "jshint": "^2.12.0",
     "uglify-js": "^3.8.0"
+  },
+  "dependencies": {
+    "uglifyjs": "^2.4.11"
   }
 }

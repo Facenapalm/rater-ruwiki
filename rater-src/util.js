@@ -114,59 +114,25 @@ function classMask(classVal) {
 		return classVal;
 	}
 	switch (classVal.toLowerCase()) {
-	case "fa":
-	case "fl":
-	case "a":
-	case "ga":
-	case "b":
-	case "c":
-	case "na":
-	case "fm":
-	case "al":
-	case "bl":
-	case "cl":
+	case "ис":
+	case "исп":
+	case "хс":
+	case "дс":
+	case "i":
+	case "ii":
+	case "iii":
+	case "iv":
 		return classVal.toUpperCase();
-	case "start":
-	case "stub":
-	case "list":
-	case "portal":
-	case "project":
-	case "draft":
-	case "book":
-	case "future":
-	case "current":
-	case "complete":
-	case "substantial":
-	case "basic":
-	case "incomplete":
-	case "meta":
-		return classVal.slice(0,1).toUpperCase() + classVal.slice(1).toLowerCase();
-	case "image":
-	case "img":
-	case "file":
-		return "File";
-	case "category":
-	case "cat":
-	case "categ":
-		return "Category";
-	case "disambiguation":
-	case "disambig":
-	case "disamb":
-	case "dab":
-		return "Disambig";
-	case "redirect":
-	case "redir":
-	case "red":
-		return "Redirect";
-	case "template":
-	case "temp":
-	case "tpl":
-		return "Template";
-	case "bplus":
-	case "b+":
-		return "Bplus";
-	case "fpo":
-		return "FPo";
+	case "1":
+		return "I";
+	case "2":
+		return "II";
+	case "3":
+		return "III";
+	case "4":
+		return "IV";
+	case "список":
+		return "Список";
 	default:
 		return classVal;
 	}
@@ -177,7 +143,7 @@ function importanceMask(importance) {
 		return importance;
 	}
 	if (importance.toLowerCase() === "na") {
-		return "NA";
+		return "";
 	}
 	return importance.slice(0,1).toUpperCase() + importance.slice(1).toLowerCase();
 }

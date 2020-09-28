@@ -1,5 +1,19 @@
 // <nowiki>
 
+var RussianPlural = function (number, variants) {
+	if (number / 10 % 10 === 1) {
+		return variants[2];
+	}
+	var digit = number % 10;
+	if (digit === 1) {
+		return variants[0];
+	}
+	if (digit >= 2 && digit <= 4) {
+		return variants[1];
+	}
+	return variants[2];
+};
+
 /**
  * @cfg {OO.ui.Element[]} items Items to be added
  * @cfg {Number} displayLimit The most to show at once. If the number of items
@@ -36,7 +50,7 @@ var ParameterListWidget = function ParameterListWidget( config ) {
 		if (hiddenCount>0) {
 			// Add button to show the hidden params
 			this.showMoreParametersButton = new OO.ui.ButtonWidget({
-				label: "Show " + hiddenCount + " more " + (hiddenCount===1 ? "parameter" : "parameters"),
+				label: "Показать ещё " + hiddenCount + RussianPlural(hiddenCount, ["параметр", "параметра", "параметров"]),
 				framed: false,
 				$element: $("<span style='margin-bottom:0'>")
 			});
@@ -46,7 +60,7 @@ var ParameterListWidget = function ParameterListWidget( config ) {
 
 	// Add the button that allows user to add more parameters
 	this.addParametersButton = new OO.ui.ButtonWidget({
-		label: "Add parameter",
+		label: "Добавить параметр",
 		icon: "add",
 		framed: false,
 		$element: $("<span style='margin-bottom:0'>")
@@ -162,7 +176,7 @@ ParameterListWidget.prototype.setPreferences = function(prefs) {
 		this.removeItems([this.showMoreParametersButton]);
 	} else {
 		this.showMoreParametersButton.setLabel(
-			"Show " + stillHiddenCount + " more " + (stillHiddenCount===1 ? "paramter" : "paramters")
+			"Показать ещё " + stillHiddenCount + RussianPlural(stillHiddenCount, ["параметр", "параметра", "параметров"])
 		);
 	}
 };
