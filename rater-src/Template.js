@@ -500,6 +500,7 @@ Template.prototype.setClassesAndImportances = function() {
 		return parsed.resolve();
 	}
 
+	/*
 	// Otherwise try reading from cached data
 	var cachedRatings = cache.read(mainText+"-ratings");
 	if (
@@ -533,11 +534,11 @@ Template.prototype.setClassesAndImportances = function() {
 		.then((result) => {
 			var catsHtml = result.parse.categorieshtml["*"];
 			var extendedClasses = config.bannerDefaults.extendedClasses.filter(function(cl) {
-				return catsHtml.indexOf("уровень " + cl) !== -1 || catsHtml.indexOf(cl + " уровень") !== -1;
+				return catsHtml.indexOf(cl + " уровня") !== -1;
 			});
 			this.classes = [...config.bannerDefaults.classes, ...extendedClasses];
 			this.importances = config.bannerDefaults.extendedImportances.filter(function(imp) {
-				return catsHtml.indexOf("важность " + imp) !== -1 || catsHtml.indexOf(imp + " важность") !== -1;
+				return catsHtml.indexOf(imp + " важности") !== -1;
 			});
 			cache.write(mainText+"-ratings",
 				{
@@ -548,6 +549,9 @@ Template.prototype.setClassesAndImportances = function() {
 			);
 			return true;
 		});
+	*/
+	this.classes = config.bannerDefaults.classes;
+	this.importances = config.bannerDefaults.importances;
 };
 
 export {Template, parseTemplates, getWithRedirectTo};
