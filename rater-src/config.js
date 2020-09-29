@@ -15,7 +15,7 @@ var config = {
 		"autostart": false,
 		"autostartRedirects": false,
 		"autostartNamespaces": [0],
-		"minForShell": 3,
+		"minForShell": 1000,
 		"bypassRedirects": true,
 		"autofillClassFromOthers": true,
 		"autofillClassFromOres": true,

@@ -131,6 +131,7 @@ function classMask(classVal) {
 		return "III";
 	case "4":
 		return "IV";
+	case "list":
 	case "список":
 		return "Список";
 	default:
@@ -145,7 +146,7 @@ function importanceMask(importance) {
 	if (importance.toLowerCase() === "na") {
 		return "";
 	}
-	return importance.slice(0,1).toUpperCase() + importance.slice(1).toLowerCase();
+	return importance.toLowerCase();
 }
 
 export {
